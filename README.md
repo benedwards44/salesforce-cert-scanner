@@ -3,7 +3,9 @@ Web scraper for retrieving Salesforce certifications for individuals based on th
 
 ## Quick Start
 
-Requires VirtualEnv to be installed.
+Requires virtualenvwrapper to be installed:
+https://formulae.brew.sh/formula/virtualenvwrapper
+
 
 ```
 mkvirtualenv scanner

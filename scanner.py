@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 # Load Chrome drive
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 
-# the CSV file to save
+# The CSV output to save
 csv_file = open('all_certs.csv', 'w')
 writer = csv.writer(csv_file)
 writer.writerow(['Name', 'Certification', 'Date'])
@@ -25,15 +25,21 @@ for practioner_name, search_string in constants.PRACTITIONERS:
     # Load the Soup to process the HTML
     soup = BeautifulSoup(browser.page_source, "html.parser")
 
-    certs = soup.find_all(text=re.compile('Salesforce Certified')) 
+    cert_divs = soup.find_all(text=re.compile('Salesforce Certified')) 
 
-    for cert in certs:
+    # Retrieve all the cert names
+    for cert_div in cert_divs:
 
-        cert_name = cert.string 
+        # Load the cert name
+        cert_name = cert_div.string 
 
-        # Remove the paragraph at the end, bit of a back
+        # Remove the paragraph at the end, bit of a hack to be honest
         if len(cert_name) < 400:
-            writer.writerow([practioner_name, cert_name, ''])
 
-# Close browser
+            # Retrieve the cert date
+            cert_date = cert_div.find_next('div').string
+
+            # Write Row to CSV
+            writer.writerow([practioner_name, cert_name, cert_date])    
+
 browser.close()
