@@ -5,8 +5,10 @@ Web scraper for retrieving Salesforce certifications for individuals based on th
 
 Requires VirtualEnv to be installed.
 
-`mkvirtualenv scanner`
-`pip install -r requirements`
-`python scanner.py`
+```
+mkvirtualenv scanner
+pip install -r requirements
+python scanner.py
+```
 
 Will output a list of individuals from the constants.py file into a CSV file.
